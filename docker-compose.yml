@@ -1,7 +1,7 @@
 version: '2'
 services:
   plex-cleaner:
-    image: nitrikx/plex-cleaner
+    image: bentilbrook/plex-cleaner
     container_name: plex-cleaner
     environment:
       # Execute the script every 5 minutes

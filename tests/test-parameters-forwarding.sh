@@ -8,7 +8,7 @@ SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # STEP 1
 # Test if the parameters are correctly passed in the single execution mode
 echo "Testing parameters forwarding in single execution mode..."
-SINGLE_EXECUTION_RESULT=$(docker run --rm -e "EXECUTION_CRON_EXPRESSION=ONCE" -v "${SCRIPT_PATH}/print-parameters.py:/app/PlexCleaner.py" "nitrikx/plex-cleaner:latest" --foo bar)
+SINGLE_EXECUTION_RESULT=$(docker run --rm -e "EXECUTION_CRON_EXPRESSION=ONCE" -v "${SCRIPT_PATH}/print-parameters.py:/app/PlexCleaner.py" "bentilbrook/plex-cleaner:latest" --foo bar)
 
 SINGLE_EXECUTION_RESULT_GREP=$(echo "$SINGLE_EXECUTION_RESULT" | grep "'--foo', 'bar'")
 if [ -z "${SINGLE_EXECUTION_RESULT_GREP}" ]; then
@@ -21,7 +21,7 @@ fi
 # STEP 2
 # Test if the parameters are correctly passed in the cron execution mode
 echo "Testing parameters forwarding in CRON mode..."
-CRON_EXECUTION_DOCKER_ID=$(docker run -d --rm -e "EXECUTION_CRON_EXPRESSION=* * * * *" -v "${SCRIPT_PATH}/print-parameters.py:/app/PlexCleaner.py" "nitrikx/plex-cleaner:latest" --foo bar)
+CRON_EXECUTION_DOCKER_ID=$(docker run -d --rm -e "EXECUTION_CRON_EXPRESSION=* * * * *" -v "${SCRIPT_PATH}/print-parameters.py:/app/PlexCleaner.py" "bentilbrook/plex-cleaner:latest" --foo bar)
 
 # Wait 1 min to be sure that the script has been executed at least one time
 echo "Waiting 1min (to let enough time to CRON to execute the script)..."
